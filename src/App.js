@@ -4,7 +4,7 @@ import { useState } from 'react';
 // 이미지 파일은 변경되지 않으므로 Component 밖에서 const로 선언
 const pokeCardImages = [
   { src: 'img/purin.jpg' },
-  { src: 'img/hasi.jpg' },
+  { src: 'img/digda.jpg' },
   { src: 'img/marin.jpg' },
   { src: 'img/pairi.jpg' },
   { src: 'img/pantem.jpg' },
