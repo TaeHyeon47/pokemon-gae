@@ -44,7 +44,9 @@ function App() {
       <button onClick={mixCards}>새 게임</button>
 
       <div className='card-grid'>
-        <Pokecard pokeCards={pokeCards} />
+        {pokeCards.map((pokeCard) => (
+          <Pokecard key={pokeCards.id} pokeCard={pokeCard} />
+        ))}
       </div>
     </div>
   );
