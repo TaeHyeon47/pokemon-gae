@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Pokecard from './component/Pokecard';
 // 이미지 파일은 변경되지 않으므로 Component 밖에서 const로 선언
 const pokeCardImages = [
@@ -16,6 +16,10 @@ function App() {
   const [pokeCards, setPokeCards] = useState([]);
   // 시도 횟수 State
   const [turns, setTurns] = useState(0);
+
+  const [firstChoice, setFirstChoice] = useState();
+  const [secondChoice, setSecondChoice] = useState();
+  const [isFrist, setIsFirst] = useState(false);
 
   // 포켓몬 카드순서 랜덤 변경
   const mixCards = () => {
@@ -36,7 +40,32 @@ function App() {
     setTurns(0);
   };
 
-  console.log(pokeCards, turns);
+  const cardChoiceHandler = (src) => {
+    if (!isFrist) {
+      setFirstChoice(src);
+      setIsFirst(true);
+    }
+
+    if (isFrist) {
+      console.log('두번째 선택', src);
+      setSecondChoice(src);
+      setIsFirst(false);
+    }
+  };
+
+  useEffect(() => {
+    const cardMatch = () => {
+      if (firstChoice === secondChoice) {
+        console.log('그림 맞추기 성공!');
+      } else {
+        console.log('그림 맞추기 실패!');
+      }
+    };
+
+    cardMatch();
+  }, [firstChoice, secondChoice]);
+
+  console.log(firstChoice, secondChoice);
 
   return (
     <div className='App'>
@@ -45,7 +74,11 @@ function App() {
 
       <div className='card-grid'>
         {pokeCards.map((pokeCard) => (
-          <Pokecard key={pokeCards.id} pokeCard={pokeCard} />
+          <Pokecard
+            key={pokeCards.id}
+            pokeCard={pokeCard}
+            choice={cardChoiceHandler}
+          />
         ))}
       </div>
     </div>
