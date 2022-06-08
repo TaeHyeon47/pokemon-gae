@@ -4,12 +4,12 @@ import Pokecard from './component/Pokecard';
 
 // 이미지 파일명은 변경되지 않으므로 Component 밖에서 const로 선언
 const pokeCardImages = [
-  { src: 'img/purin.jpg' },
-  { src: 'img/digda.jpg' },
-  { src: 'img/marin.jpg' },
-  { src: 'img/pairi.jpg' },
-  { src: 'img/pantem.jpg' },
-  { src: 'img/picacu.jpg' },
+  { src: 'img/purin.jpg', matched: false },
+  { src: 'img/digda.jpg', matched: false },
+  { src: 'img/marin.jpg', matched: false },
+  { src: 'img/pairi.jpg', matched: false },
+  { src: 'img/pantem.jpg', matched: false },
+  { src: 'img/picacu.jpg', matched: false },
 ];
 
 function App() {
@@ -59,6 +59,15 @@ function App() {
   useEffect(() => {
     if (firstChoice && secondChoice) {
       if (firstChoice.src === secondChoice.src) {
+        setPokeCards((preveState) => {
+          return preveState.map((card) => {
+            if (card.src === firstChoice.src) {
+              return { ...card, matched: true };
+            } else {
+              return card;
+            }
+          });
+        });
         console.log('그림 맞추기 성공!');
         resetValue();
       } else {
@@ -67,6 +76,8 @@ function App() {
       }
     }
   }, [firstChoice, secondChoice]);
+
+  console.log(pokeCards);
 
   // 카드 선택 초기화와 턴 횟수 계산
   const resetValue = () => {
