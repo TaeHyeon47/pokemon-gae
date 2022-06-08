@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-
+import Pokecard from './component/Pokecard';
 // 이미지 파일은 변경되지 않으므로 Component 밖에서 const로 선언
 const pokeCardImages = [
   { src: 'img/purin.jpg' },
@@ -44,15 +44,7 @@ function App() {
       <button onClick={mixCards}>새 게임</button>
 
       <div className='card-grid'>
-        {pokeCards.map((pokeCard) => (
-          // 배열 사용시 Parent element는 항상 key property를 가지고 있어야 한다.
-          <div className='card' key={pokeCard.id}>
-            <div>
-              <img className='front' src={pokeCard.src} alt='Pokemon Card' />
-              <img className='back' src='/img/ball.jpg' alt='PokeBall Card' />
-            </div>
-          </div>
-        ))}
+        <Pokecard pokeCards={pokeCards} />
       </div>
     </div>
   );
