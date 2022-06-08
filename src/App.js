@@ -43,10 +43,16 @@ function App() {
       <h1>포켓몬 같은그림 찾기 게임</h1>
       <button onClick={mixCards}>새 게임</button>
 
-      <div>
-        {pokeCards.map((pokeCard) => {
-          return <img src={pokeCard.src} alt='' />;
-        })}
+      <div className='card-grid'>
+        {pokeCards.map((pokeCard) => (
+          // 배열 사용시 Parent element는 항상 key property를 가지고 있어야 한다.
+          <div className='card' key={pokeCard.id}>
+            <div>
+              <img className='front' src={pokeCard.src} alt='Pokemon Card' />
+              <img className='back' src='/img/ball.jpg' alt='PokeBall Card' />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
