@@ -72,7 +72,9 @@ function App() {
         resetValue();
       } else {
         console.log('그림 맞추기 실패!');
-        resetValue();
+        setTimeout(() => {
+          resetValue();
+        }, 700);
       }
     }
   }, [firstChoice, secondChoice]);
@@ -84,7 +86,7 @@ function App() {
     setFirstChoice(null);
     setSecondChoice(null);
     setTurns((preveState) => {
-      return (preveState += 0);
+      return (preveState += 1);
     });
   };
 
