@@ -113,6 +113,11 @@ function App() {
             key={pokeCard.id}
             pokeCard={pokeCard}
             choiceHandle={cardChoiceHandler}
+            flipped={
+              pokeCard === firstChoice ||
+              pokeCard === secondChoice ||
+              pokeCard.matched
+            }
           />
         ))}
       </div>
