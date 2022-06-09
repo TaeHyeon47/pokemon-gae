@@ -37,4 +37,5 @@
 
 
 - 같은 카드를 선택하여 모든 카드를 뒤집으면 성공입니다.
-![성공](https://user-images.githubusercontent.com/96715209/172792781-cc0b67de-f4c5-4837-ae61-d0134dda8c66.gif)
+
+   ![성공](https://user-images.githubusercontent.com/96715209/172793230-2c8dfae2-7b89-45f1-833f-9a9b54b47402.gif)
