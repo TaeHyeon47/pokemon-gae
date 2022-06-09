@@ -6,7 +6,7 @@
 
 🔗  [배포 사이트](https://rad-snickerdoodle-8efa5c.netlify.app)
 
-🔗  [시연 영상(Youtube)](https://youtu.be/kXbPpu10uTA)  
+🔗  [시연 영상(Youtube)](https://www.youtube.com/watch?v=M2WVrw4qXiw)  
 
 ## 🐼 프로젝트 소개
 
@@ -25,3 +25,4 @@
 - Javascript ES6+
 - React
 - HTML5, CSS
+
