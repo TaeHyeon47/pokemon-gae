@@ -15,12 +15,17 @@ const pokeCardImages = [
 function App() {
   // 포켓몬 카드 State
   const [pokeCards, setPokeCards] = useState([]);
-  // 시도 횟수 State
-  const [turns, setTurns] = useState(0);
+  // 점수 State
+  const [score, setScore] = useState(20);
+  // 최대 점수 State
+  const [maxScore, setMaxScore] = useState(0);
   // 선택된 카드 State
   const [firstChoice, setFirstChoice] = useState(null);
   const [secondChoice, setSecondChoice] = useState(null);
+  // 여러번 클릭 버그 방지 State
   const [disabled, setDisabled] = useState(false);
+  const [successGame, setSuccessGame] = useState(false);
+  const [failGame, setFailGame] = useState(false);
 
   // 포켓몬 카드순서 랜덤 변경
   const mixCards = () => {
@@ -41,17 +46,27 @@ function App() {
     // 포켓몬카드 순서 변경
     setPokeCards(mixedCards);
     // 시도 횟수 초기화
-    setTurns(0);
+    setScore(20);
   };
 
   // 카드 선택
   const cardChoiceHandler = (pokeCard) => {
-    firstChoice ? setSecondChoice(pokeCard) : setFirstChoice(pokeCard);
+    if (score) {
+      firstChoice ? setSecondChoice(pokeCard) : setFirstChoice(pokeCard);
+    } else {
+      setDisabled(true);
+      setFailGame(true);
+      console.log('남은 점수가 없습니다.');
+    }
   };
 
+  // 첫번째, 두번째 카드 일치 확인
   useEffect(() => {
+    // 첫번째, 두번째 카드가 있는 경우에만 실행
     if (firstChoice && secondChoice) {
+      // 클릭 비활성화
       setDisabled(true);
+      // 첫번째, 두번째 카드 일치 여부 확인
       if (firstChoice.src === secondChoice.src) {
         setPokeCards((preveState) => {
           return preveState.map((card) => {
@@ -62,31 +77,44 @@ function App() {
             }
           });
         });
+        // 선택 값 초기화
         resetValue();
       } else {
         setTimeout(() => {
           resetValue();
         }, 700);
+        setScore((preveState) => {
+          return (preveState -= 1);
+        });
       }
     }
+    // 클릭할 때마다 실행
   }, [firstChoice, secondChoice]);
-
-  console.log(pokeCards);
 
   // 카드 선택 초기화와 턴 횟수 계산
   const resetValue = () => {
     setFirstChoice(null);
     setSecondChoice(null);
-    setTurns((preveState) => {
-      return (preveState += 1);
-    });
+    // 클릭 활성화
     setDisabled(false);
   };
-
   // 첫 랜딩 시, 게임 자동 시작
   useEffect(() => {
     mixCards();
   }, []);
+
+  useEffect(() => {
+    if (score < 20) {
+      const winGame = pokeCards.find((card) => card.matched === false);
+      if (!winGame) {
+        console.log('게임에서 승리했습니다');
+        setSuccessGame(true);
+        if (score > maxScore) {
+          setMaxScore(score);
+        }
+      }
+    }
+  }, [pokeCards, score, maxScore]);
 
   return (
     <div className='App'>
@@ -108,7 +136,12 @@ function App() {
           />
         ))}
       </div>
-      <p>시도횟수 : {turns}</p>
+      <p>
+        {successGame ? '그림 찾기에 성공했습니다. 최대점수를 높여보세요!' : ''}
+      </p>
+      <p>{failGame ? '남은 점수가 없습니다. 새 게임을 시작하세요!' : ''}</p>
+      <p>점수 : {score}</p>
+      <p>최대점수 : {maxScore}</p>
     </div>
   );
 }
