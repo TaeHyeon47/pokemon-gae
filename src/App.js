@@ -35,6 +35,9 @@ function App() {
         return { ...card, id: Math.random() };
       });
 
+    setFirstChoice(null);
+    setSecondChoice(null);
+
     // 포켓몬카드 순서 변경
     setPokeCards(mixedCards);
     // 시도 횟수 초기화
