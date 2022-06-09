@@ -20,6 +20,7 @@ function App() {
   // 선택된 카드 State
   const [firstChoice, setFirstChoice] = useState(null);
   const [secondChoice, setSecondChoice] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   // 포켓몬 카드순서 랜덤 변경
   const mixCards = () => {
@@ -43,21 +44,11 @@ function App() {
   // 카드 선택
   const cardChoiceHandler = (pokeCard) => {
     firstChoice ? setSecondChoice(pokeCard) : setFirstChoice(pokeCard);
-
-    // if (!isFrist) {
-    //   setFirstChoice(pokeCard);
-    //   setIsFirst(true);
-    // }
-
-    // if (isFrist) {
-    //   console.log('두번째 선택', pokeCard);
-    //   setSecondChoice(pokeCard);
-    //   setIsFirst(false);
-    // }
   };
 
   useEffect(() => {
     if (firstChoice && secondChoice) {
+      setDisabled(true);
       if (firstChoice.src === secondChoice.src) {
         setPokeCards((preveState) => {
           return preveState.map((card) => {
@@ -68,10 +59,8 @@ function App() {
             }
           });
         });
-        console.log('그림 맞추기 성공!');
         resetValue();
       } else {
-        console.log('그림 맞추기 실패!');
         setTimeout(() => {
           resetValue();
         }, 700);
@@ -88,21 +77,8 @@ function App() {
     setTurns((preveState) => {
       return (preveState += 1);
     });
+    setDisabled(false);
   };
-
-  // useEffect(() => {
-  //   const cardMatch = () => {
-  //     if (firstChoice === secondChoice) {
-  //       console.log('그림 맞추기 성공!');
-  //     } else {
-  //       console.log('그림 맞추기 실패!');
-  //     }
-  //   };
-
-  //   cardMatch();
-  // }, [firstChoice, secondChoice]);
-
-  // console.log(firstChoice, secondChoice);
 
   return (
     <div className='App'>
@@ -120,6 +96,7 @@ function App() {
               pokeCard === secondChoice ||
               pokeCard.matched
             }
+            disabled={disabled}
           />
         ))}
       </div>

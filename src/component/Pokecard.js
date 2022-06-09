@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 import './Pokecard.css';
 
-const Pokecard = ({ pokeCard, choiceHandle, flipped }) => {
+const Pokecard = ({ pokeCard, choiceHandle, flipped, disabled }) => {
   const clickHandler = () => {
-    choiceHandle(pokeCard);
+    if (!disabled) {
+      choiceHandle(pokeCard);
+    }
   };
 
   return (
