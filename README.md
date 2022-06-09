@@ -4,7 +4,7 @@
 
 ![image](https://user-images.githubusercontent.com/96715209/172781760-d3dedb6b-4014-4da8-aa75-b5616b651f51.png)
 
-🔗  [사이트](https://rad-snickerdoodle-8efa5c.netlify.app)
+🔗  [배포 사이트](https://rad-snickerdoodle-8efa5c.netlify.app)
 
 🔗  [시연 영상(Youtube)](https://youtu.be/kXbPpu10uTA)  
 
