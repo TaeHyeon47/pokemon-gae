@@ -80,6 +80,11 @@ function App() {
     setDisabled(false);
   };
 
+  // 첫 랜딩 시, 게임 자동 시작
+  useEffect(() => {
+    mixCards();
+  }, []);
+
   return (
     <div className='App'>
       <h1>포켓몬 같은그림 찾기 게임</h1>
@@ -100,6 +105,7 @@ function App() {
           />
         ))}
       </div>
+      <p>시도횟수 : {turns}</p>
     </div>
   );
 }
