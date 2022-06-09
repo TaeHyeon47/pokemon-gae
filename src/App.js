@@ -47,6 +47,7 @@ function App() {
     setPokeCards(mixedCards);
     // 시도 횟수 초기화
     setScore(20);
+    setSuccessGame(false);
   };
 
   // 카드 선택
